@@ -75,8 +75,17 @@ WSGI_APPLICATION = 'webshopapi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fuguang',
+        'PORT': '3306',
+        'HOST': '127.0.0.1',
+        'USER': 'fuguang_user',
+        'PASSWORD': 'fuguang',
+        'OPTIONS': {'charset': 'utf8mb4'},
+        'POOL_OPTIONS': {
+            'POOL_SIZE': 10,
+            'MAX_OVERFLOW': 10
+        }
     }
 }
 
@@ -168,7 +177,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             # 日志位置,日志文件名，日志保存目录logs必须手动创建
-            'filename': BASE_DIR.parent / "logs/webshopapi.log",
+            'filename': BASE_DIR.parent.parent / "logs/webshopapi.log",
             # 单个日志文件的最大值，这里我们设置300M
             'maxBytes': 300 * 1024 * 1024,
             # 备份日志文件的数量，设置最大日志数量为10
@@ -183,4 +192,11 @@ LOGGING = {
             'propagate': True,   # 是否在django命名空间对应的日志处理流程结束以后，冒泡通知其他的日志功能。True表示允许
         },
     }
+}
+
+
+# DRF Setting
+REST_FRAMEWORK = {
+    # custom exception
+    'EXCEPTION_HANDLER': 'webshopapi.utils.exceptions.custom_exception_handler',
 }
