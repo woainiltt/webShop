@@ -10,5 +10,17 @@ export default defineConfig({
       Components({
         resolvers: [ElementPlusResolver()],
       }),
-  ]
+  ],
+  server: {
+      port: '3000',
+      host: 'www.fuguang.cn',
+      proxy: {
+          '/api': {
+              target: 'http://api.fuguang.cn:8000/',
+              changeOrigin: true,
+              ws: true,
+              rewrite: path => path.replace(/^\/api/, '')
+          }
+      }
+  }
 })
