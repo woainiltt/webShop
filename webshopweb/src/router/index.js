@@ -2,7 +2,24 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 // 路由列表
 const routes = [
-
+  {
+    meta:{
+      title: "webOnlineShop-home",
+      keepAlive: true
+    },
+    path: "/",
+    name: "Home",
+    component: ()=> import("../views/Home.vue")
+  },
+  {
+    meta:{
+        title: "webOnlineShop-userLogin",
+        keepAlive: true
+    },
+    path:'/login',      // uri访问地址
+    name: "Login",
+    component: ()=> import("../views/Login.vue")
+  }
 ]
 
 // 路由对象实例化
